@@ -1,0 +1,32 @@
+# Go Learning
+- fast development, fast run and no technical debt!  
+- Suitable for big data, microservice,concurrency programming.  
+- no "object", no inheritance, no polymorphism, no generic programming, no try/catch...
+- have interface, functional programming,   CSP (goroutine + channel)...
+## Installation of GO 
+- download from https://golang.org/
+- after installation, type `go version` in cmd, then we can get the version number (go1.16.3 windows/amd64)
+- if necessary, set the proxy by `GOPROXY` variable
+- type `go env` to get the env variables
+- first set the GO111MODULE to on(it's for dependency management)
+  - `go env -w GO111MODULE=on`
+    - be careful that it's "on", not "ON",or you'll get some bugs
+  - (see here for details https://github.com/golang/go/wiki/Modules)
+- get "goimports", it will help us do following 3 things when we save the go file
+  - delete unnecessary space
+  - add missing imports
+  - sort the imports
+  - `go get -v golang.org/x/tools/cmd/goimports`
+## GO Configuration of IDE (Intellij) & helloworld
+- settings - plugins
+  - install GO
+  - install Filw Watchers
+    - for formatting
+- new project - Go Modules - Next - set project name - complete
+- new- go file - simple application - hello.go
+  - add `fmt.Println("hello world")` in main function
+  - `go run hello.go`
+- Hello World!
+  - parameter hints are not so useful in GO, so just close it in Settings-Editor-Inlay Hints-GO
+  - add a goimports file watcher(Settings-Tools-File Watcher)
+  - module name is in go.mod file (`go mod init MODULENAME`)
