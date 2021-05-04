@@ -30,7 +30,8 @@ func main() {
 	fmt.Println("-------------------")
 	euler()
 	triangle()
-
+	consts()
+	enums()
 }
 
 func variableZeroValue() {
@@ -103,4 +104,56 @@ func triangle() {
 	// do these type changes explicitly!
 	c = int(math.Sqrt(float64(a*a + b*b)))
 	fmt.Println(c)
+}
+
+// const can also defined outside functions, scope is package
+//const filename = "abc.txt"
+
+//in other languages, we often let those consts written in upper form(like FILENAME)
+//but in GO, capitalized letter have other meanings(when you capitalize the first word, it means the variable is public )
+//so just use lower case
+func consts() {
+	//const filename string= "abc.txt" is also OK
+	const filename = "abc.txt"
+	//const a, b int = 3, 4 is also OK, const is something like text replacement, so it can be used as any type
+	// but if you add int, c = int(math.Sqrt(a*a + b*b)) can't be compiled because of type change issue
+	const a, b = 3, 4
+	// below is also OK
+	const (
+		filename2 = "abc.txt"
+		a2, b2    = 3, 4
+	)
+	var c int
+	c = int(math.Sqrt(a*a + b*b))
+	fmt.Println(filename, c)
+}
+
+func enums() {
+	//const (
+	//	dog   = 0
+	//	cat   = 1
+	//	mouse = 2
+	//	bird  = 3
+	//)
+	//above codes can simplified as below
+	// iota means autoincrement
+	const (
+		dog = iota
+		_
+		mouse
+		bird
+		bear
+	)
+
+	//iota can do more things~
+	const (
+		b = 1 << (10 * iota)
+		kb
+		mb
+		gb
+		tb
+		pb
+	)
+	fmt.Println(dog, bear, mouse, bird)
+	fmt.Println(b, kb, mb, gb, tb, pb)
 }
