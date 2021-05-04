@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"math/cmplx"
+)
 
 // var can't be omitted here by :=
 // the scope of aa & ss & ff here is package, not global!
@@ -23,6 +27,10 @@ func main() {
 	variableShorter()
 	fmt.Println(aa, ss, ff)
 	fmt.Println(bb, cc, dd)
+	fmt.Println("-------------------")
+	euler()
+	triangle()
+
 }
 
 func variableZeroValue() {
@@ -42,7 +50,10 @@ func variableInitialValue() {
 	//(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr
 	//byte <- same as (u)int8
 	//rune(char type in GO) <- same as (u)int32
-	//float32, float64, complex64, complex128 (实数)
+	//float32, float64
+	//complex64, complex128 (实数)
+	//-> complex64 = float32 + float32
+	//-> complex128 = float64 + float64
 	fmt.Println("in init value")
 	var a int = 777
 	var b, c int = 88, 99
@@ -68,4 +79,28 @@ func variableShorter() {
 	b, c, d, e, f := 88, 99, false, 9.8, "ppp"
 	b = 777
 	fmt.Println(b, c, d, e, f)
+}
+
+func euler() {
+	c := 3 + 4i
+	fmt.Println(cmplx.Abs(c))
+	//verify e^(i*pi) + 1 = 0
+	fmt.Println(cmplx.Pow(math.E, 1i*math.Pi) + 1) //use 1i to show i
+	fmt.Println(cmplx.Exp(1i*math.Pi) + 1)         //same as above
+	//but answer is not 0
+	// change the format to show 0, just take 3 digits
+	fmt.Printf("%.3f", cmplx.Exp(1i*math.Pi)+1)
+	fmt.Println()
+}
+
+func triangle() {
+	// no implicit type change in GO!!
+	// so you should do type changes explicitly
+	var a, b int = 3, 4
+	var c int
+	//can't be compiled if you write following code
+	//c = math.Sqrt(a * a + b * b)
+	// do these type changes explicitly!
+	c = int(math.Sqrt(float64(a*a + b*b)))
+	fmt.Println(c)
 }
