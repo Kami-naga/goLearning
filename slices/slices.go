@@ -50,7 +50,16 @@ func main() {
 	fmt.Printf("s2=%v, len(s2)=%d, cap(s2)=%d\n",
 		s2, len(s2), cap(s2)) // s2 = [5, 6] !!! why it can get 6 ??
 	fmt.Println(s1[3:6])
-	fmt.Println(s1[3:7])
+	//fmt.Println(s1[3:7]) it can't be compiled
+
+	s3 := append(s2, 10)
+	s4 := append(s3, 11)
+	s5 := append(s4, 12)
+	fmt.Println("s3, s4, s5 = ", s3, s4, s5)
+	//s4 and s5 no longer view arr.
+	fmt.Println("arr = ", arr) //[0 1 2 3 4 5 6 10] where is 11 & 12?
+	//添加元素时若>cap,系统会重新分配一个更大的底层数组(每次cap*2)，上边11，12就在新的大数组里头了
+	//由于值传递关系，我们一定要接受返回值，即写成 s= append(s, val)的形式
 }
 
 func updateSlice(s []int) {
