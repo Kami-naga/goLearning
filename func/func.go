@@ -28,6 +28,10 @@ func main() {
 	}, 3, 4))
 
 	fmt.Println(sum(1, 2, 3, 4, 5))
+
+	a, b := 3, 4
+	a, b = swap3(a, b)
+	fmt.Println(a, b)
 }
 
 //没有默认函数，可选参数，函数重载，操作符重载，只有一个可变参数列表
@@ -37,6 +41,26 @@ func sum(numbers ...int) int {
 		s += numbers[i]
 	}
 	return s
+}
+
+// GO has pointers! but pointers in GO are much easier than that in C/C++
+// because pointers in GO can't be "calculated"
+//e.g. ptr = ptr+ 1 X
+// only operation we can do is to let a pointer point to another address
+//e.g. ptr = &a; ptr = &b ✔
+func swap1(a, b int) {
+	b, a = a, b // is it ok? no!!!
+
+}
+
+func swap2(a, b *int) {
+	// is it ok? ok! but when you use, you have to do like this swap(&a, &b)
+	*b, *a = *a, *b
+
+}
+
+func swap3(a, b int) (int, int) {
+	return b, a
 }
 
 func eval1(a, b int, op string) int {
