@@ -3,7 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	//slice不是值类型
+	//在GO中一切都是值传递
+	//slice也不例外，但slice是一个array的视图，它是一个指针，指向存放真正元素的数据块
+	//因此即便值传递，也只是指针复制了一下，原指针和新复制出的指针都指向同一数据
+	//因此对slice的元素进行更改时，别的指向同一数据的slice以及原数组array都会发生变化
 	// slice is a view of array
 	arr := [...]int{0, 1, 2, 3, 4, 5, 6, 7}
 	s := arr[2:6] // [2,6)
@@ -59,7 +62,9 @@ func main() {
 	//s4 and s5 no longer view arr.
 	fmt.Println("arr = ", arr) //[0 1 2 3 4 5 6 10] where is 11 & 12?
 	//添加元素时若>cap,系统会重新分配一个更大的底层数组(每次cap*2)，上边11，12就在新的大数组里头了
+	//原小数组仍在，当没人用它了，则会被垃圾回收掉
 	//由于值传递关系，我们一定要接受返回值，即写成 s= append(s, val)的形式
+	//why？ 因为新append后，可能原数组cap不够了，此时会去指向新的大数组，即slice指针会变掉，如果还用原来的数组，新的值就莫得了
 }
 
 func updateSlice(s []int) {
