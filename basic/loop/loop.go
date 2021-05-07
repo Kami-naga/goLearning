@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"strconv"
 	"strings"
@@ -16,13 +17,22 @@ func main() {
 	//	convertToBin(5),
 	//	convertToBin(13),
 	//	convertToBin(0))
+
+	//fmt.Fprintf() first param is a Writer, not a file, so it can be many things. not file only
+	// so as fmt.Fscanf()  Reader
 	fmt.Println(
 		convertToBin(5),
 		convertToBin(13),
 		convertToBin(0),
 	)
 
-	printFile(filename)
+	printFile("basic/branch/a.txt")
+	s := `abc"d"
+	kkkk
+	123
+
+	p`
+	printFileContents(strings.NewReader(s)) // bytes.NewReader()也差不多
 	easyCheck()
 	//forever()
 }
@@ -40,12 +50,16 @@ func printFile(filename string) {
 	if file, err := os.Open(filename); err != nil {
 		panic(err)
 	} else {
-		scanner := bufio.NewScanner(file)
-		//below for is what called while in other languages
-		//No "while" in GO
-		for scanner.Scan() {
-			fmt.Println(scanner.Text())
-		}
+		printFileContents(file)
+	}
+}
+
+func printFileContents(reader io.Reader) {
+	scanner := bufio.NewScanner(reader)
+	//below for is what called while in other languages
+	//No "while" in GO
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
 	}
 }
 
