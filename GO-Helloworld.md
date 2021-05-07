@@ -30,3 +30,14 @@
   - parameter hints are not so useful in GO, so just close it in Settings-Editor-Inlay Hints-GO
   - add a goimports file watcher(Settings-Tools-File Watcher)
   - module name is in go.mod file (`go mod init MODULENAME`)
+
+## GO dependency
+- we use GOPATH，GOVENDOR before manage the dependencies by putting all the dependencies together in GOPATH
+- when we need different versions of a lib for 2 projects, it's hard to do if we  use only GOPATH,so we have VENDOR in each project,those different things can be put into the vendor dir, and the same things still put in GOPATH
+- above approaches have a strict restriction on path, it's not so convenient, so we have go mod now
+    - `go get xxxxxx` to add a dependency,if you need specified version, add `@version` at last
+    - `go mod tidy` to delete unused dependency & add imported dependency
+    - when migrating from GOPATH&GOVENDOR to go mod, it's also easy,just use `go mod init MODNAME` and then `go mod tidy` to add them to the go mod file, then you can delete everything in the vendor file
+## GO output
+- use `go build ./...` to check if all the files can be built, but no output file
+- use `go install ./...` to get an output, the output files will be in GOPATH(you can get it at `go env`)
