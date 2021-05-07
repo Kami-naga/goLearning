@@ -41,3 +41,8 @@
 ## GO output
 - use `go build ./...` to check if all the files can be built, but no output file
 - use `go install ./...` to get an output, the output files will be in GOPATH(you can get it at `go env`)
+
+## Interaface
+- GO is an interface oriented language,no inheritance, no polymorphism, and it is interfaces that implement the functions that inheritance & polymorphism do in other languages. Interfaces in Go are very flexible.
+- duck typing:describe the external behavior, not the internal structure
+    - duck typing in Go is as flexible as python & c++, and also has a type check as java
