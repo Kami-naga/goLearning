@@ -46,3 +46,11 @@
 - GO is an interface oriented language,no inheritance, no polymorphism, and it is interfaces that implement the functions that inheritance & polymorphism do in other languages. Interfaces in Go are very flexible.
 - duck typing:describe the external behavior, not the internal structure
     - duck typing in Go is as flexible as python & c++, and also has a type check as java
+
+## Functional Programming
+- in a function, args, variables & return value can all be functions!(in C++, we only have function pointer;in Java, we can only call the function, we can't send a function to others)
+- high order function(高阶函数) e.g. func apply(a,b int, op func(int, int) int) int
+- function -> closure
+- orthodox Functional Programming (very strict)
+    - unchangeability: does not have status, only consts & function
+    - function can only have 1 argument
