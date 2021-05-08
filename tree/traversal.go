@@ -9,3 +9,19 @@ func (node *Node) Traverse() {
 	node.Print()
 	node.Right.Traverse()
 }
+
+func (node *Node) Traverse2() {
+	node.TraverseFunc(func(n *Node) {
+		n.Print()
+	})
+}
+
+func (node *Node) TraverseFunc(f func(node *Node)) {
+	if node == nil {
+		return
+	}
+
+	node.Left.TraverseFunc(f)
+	f(node)
+	node.Right.TraverseFunc(f)
+}

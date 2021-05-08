@@ -30,9 +30,14 @@ func main() {
 	root.Right.Left = new(tree.Node) // no more -> like root.right->left, all are .
 	root.Left.Right = tree.CreateNode(2)
 	root.Right.Left.SetValue(4)
-	root.Traverse()
+	root.Traverse2()
 	fmt.Println()
 
+	nodeCount := 0
+	root.TraverseFunc(func(node *tree.Node) {
+		nodeCount++
+	})
+	fmt.Println("Node count:", nodeCount)
 	//myRoot := myTreeNode{&root}
 	//myRoot.postOrder()
 	root.postOrder()
