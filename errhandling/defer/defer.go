@@ -27,10 +27,32 @@ func tryDefer2() {
 	}
 }
 
+//type myError struct {}
+//
+//func (err myError) Error() string {
+//	return "my error text"
+//}
+
 func writeFile(filename string) {
-	file, err := os.Create(filename)
+	//file, err := os.Create(filename)
+	file, err := os.OpenFile(filename, os.O_EXCL|os.O_CREATE, 0666) //make an error
+	//err = errors.New("this is a custom error") //custom error, you can also implement the error interface to create one
+	//err = myError{}
 	if err != nil {
-		panic(err)
+		//panic(err) //program will be stopped, so it's not so good,below is a good way to deal with err
+		//fmt.Println("file already exists")
+		//error is an interface, it has only 1 function, Error() string, so we can use it to get a string
+		//fmt.Println("ERROR: ", err.Error())
+		//fmt.Println("ERROR: ", err) //it will automatically find the the err string
+		if pathError, ok := err.(*os.PathError); !ok {
+			//panic(err)
+			fmt.Println("unknown error", err)
+		} else {
+			fmt.Printf("%s, %s, %s\n", pathError.Op, //open
+				pathError.Path, //fib.txt
+				pathError.Err)  //The file exists
+		}
+		return
 	}
 	defer file.Close()
 
@@ -49,6 +71,6 @@ func writeFile(filename string) {
 //defer列表为后进先出
 //建了什么东西需要些指令与其成对时，用defer， 如Open/Close, Lock/Unlock, PrintHeader/PrintFooter
 func main() {
-	tryDefer2() //what's the result? 321 panic, so in defer, there is a stack
+	//tryDefer2() //what's the result? 321 panic, so in defer, there is a stack
 	writeFile("fib.txt")
 }
