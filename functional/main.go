@@ -3,17 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"goLearning/functional/fib"
 	"io"
 	"strings"
 )
-
-func fibonacci() intGen {
-	a, b := 0, 1
-	return func() int {
-		a, b = b, a+b
-		return a
-	}
-}
 
 //GO特点之一，能给函数实现接口
 type intGen func() int
@@ -47,7 +40,7 @@ func printFileContents(reader io.Reader) {
 //2.没有Lambda表达式，但是有匿名函数，加强匿名函数用法后，Lambda纯粹只是语法上的添加，没必要再加Lambda表达式了，所以GO没Lambda
 //3.
 func main() {
-	f := fibonacci()
+	var f intGen = fib.Fibonacci()
 
 	//fmt.Println(f()) // 1
 	//fmt.Println(f()) // 1
