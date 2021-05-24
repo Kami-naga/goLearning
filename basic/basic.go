@@ -23,7 +23,7 @@ func main() {
 	fmt.Println("hello world")
 	variableZeroValue()
 	variableInitialValue()
-	variableTpeDeduction()
+	variableTypeDeduction()
 	variableShorter()
 	fmt.Println(aa, ss, ff)
 	fmt.Println(bb, cc, dd)
@@ -63,7 +63,7 @@ func variableInitialValue() {
 	fmt.Println(a, b, c, d, e, f, s)
 }
 
-func variableTpeDeduction() {
+func variableTypeDeduction() {
 	// GO can know the type of the variable from its initial value
 	//so no need to add a type behind if you give it an initial value
 	fmt.Println("in type deduction")
