@@ -4,6 +4,10 @@ import (
 	"fmt"
 )
 
+//use error ! use less panic as you can
+//only those unexpected error you can use panic
+//(you don't know what will happen &
+//you don't know how to deal with them)
 func main() {
 	tryRecover()
 }
