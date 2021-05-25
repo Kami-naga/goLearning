@@ -54,3 +54,9 @@
 - orthodox Functional Programming (very strict)
     - unchangeability: does not have status, only consts & function
     - function can only have 1 argument
+    
+## Go doc
+- use cmd `go doc xxx` to get the doc of a code(fucntion, struct...)
+- `go help doc` to see the help
+- we can use a tool called "godoc" to see docs more easily(`go get golang.org/x/tools/cmd/godoc`)
+-then we can type like `godoc -http :6060` to use it

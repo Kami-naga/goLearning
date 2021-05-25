@@ -1,13 +1,19 @@
 package queue
 
 //type Queue []int //queue only support int type
+
+// An FIFO queue.
 type Queue []interface{} //queue can support all types!
 
 //change q, so must be pointer receiver
+
+// Pushes the element into the queue.
+// 	e.g. q.Push(123) (add some space before you write the doc, then the view will changed -> in a block)
 func (q *Queue) Push(v interface{}) {
 	*q = append(*q, v)
 }
 
+// Pops element from head.
 func (q *Queue) Pop() interface{} {
 	head := (*q)[0]
 	*q = (*q)[1:]
@@ -36,6 +42,7 @@ func (q *Queue) Pop() interface{} {
 //	return head.(int)
 //}
 
+// Returns if the queue is empty or not.
 func (q *Queue) IsEmpty() bool {
 	return len(*q) == 0
 }
