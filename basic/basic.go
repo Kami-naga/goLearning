@@ -98,12 +98,17 @@ func triangle() {
 	// no implicit type change in GO!!
 	// so you should do type changes explicitly
 	var a, b int = 3, 4
+
+	fmt.Println(calcTriangle(a, b))
+}
+
+func calcTriangle(a, b int) int {
 	var c int
 	//can't be compiled if you write following code
 	//c = math.Sqrt(a * a + b * b)
 	// do these type changes explicitly!
 	c = int(math.Sqrt(float64(a*a + b*b)))
-	fmt.Println(c)
+	return c
 }
 
 // const can also defined outside functions, scope is package
