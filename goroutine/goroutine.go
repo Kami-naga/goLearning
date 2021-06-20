@@ -7,6 +7,26 @@ import (
 
 func printHello() {}
 
+// Subroutines(like function call) are special cases of more general program components, called coroutines.
+// In contrast to the unsymmetric
+// - Donnald Knuth "The Art of Computer Programming. Vol1"
+//子程序是协程的特例
+
+// in C++, we can use Boost.Coroutine to use coroutines
+// in Java, it is not supported, but in some third party JVM, coroutine is supported
+// in python, coroutine is a bit well supported compared to cpp & java,
+// in python, you can use yield to implement coroutine, after python3.5, async def is added to support coroutine, which means coroutine should be decided when defining
+// then in GO, coroutine is very well supported, for any function, just add a `go`, then you can send this func to the scheduler to treat it as a coroutine(goroutine) (more convenient than python)
+// the scheduler will decide the position of this goroutine, maybe 1 goroutine in 1 thread, or more goroutines in 1 thread
+// the scheduler will switch coroutines at a proper time, which is a bit different from traditional coroutine
+// in traditional coroutine, we should decide when to switch, but in GO, scheduler decides it, so just write functions as normal
+// some switching time(it may, not must):
+// 1. I/O, select
+// 2. channel
+// 3. waiting for a lock
+// 4. function call
+// 5. runtime.Gosched()
+
 //coroutine features:
 //1. coroutines are kind of light threads
 //2. They are compiler/interpreter/VM level multitasking, not OS level
@@ -27,6 +47,10 @@ func main() {
 	//runtime.GOMAXPROCS(1) //make it run on only 1 processor
 
 	var a [10]int
+	//如果这里的10改成1000，scheduler会开多少线程呢？
+	//可以发现线程数一般不会超过我们cpu的核数，现在由scheduler来控制了，就没必要多开thread让系统来调度这些了（因为开销大）
+
+	//对别的语言而言，一下子开十个，一百个线程差不多极限了，上千就不能单靠这样简单开线程了，得使用异步IO
 	for i := 0; i < 10; i++ {
 		//go printHello()
 		//we can do it like above,but in most of time, we just write them directly
